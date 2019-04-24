@@ -3,8 +3,14 @@
 # この時文字列に'AC'は部分文字列として何回現れるか
 N, Q = map(int, input().split(" "))
 S = input()
-bi_gram = [1 if S[k:k + 2] == "AC" else 0 for k in range(N - 1)]
-qs = [list(map(int, input().split(" "))) for i in range(Q)]
+ac_cnts = []
+ac_cnt = 0
+for i in range(N-1):
+    if S[i:i+2] == "AC":
+        ac_cnt += 1
+    ac_cnts.append(ac_cnt)
 
-for q in qs:
-    print(sum(bi_gram[q[0] - 1: q[1] - 1]))
+
+for j in range(Q):
+    l, r = map(int, input().split(" "))
+    print(ac_cnts[r] - ac_cnts[l-2])
